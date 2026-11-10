@@ -1,0 +1,21 @@
+# Didoabe Property Company
+
+> Property management information and WhatsApp inquiry forms for landlords and tenants in Uganda. This website is static. Forms prepare a WhatsApp draft; the company receives an inquiry only if the visitor presses Send in WhatsApp.
+
+## Pages
+
+- [Home](/): Overview of property management services and contact options.
+- [About Us](/#about): Company information and service scope.
+- [Services](/#services): Property management service information.
+- [Landlords](/#landlords): Owner information, scenario calculator, and WhatsApp inquiry form.
+- [Tenants](/#tenants): Tenant support information and WhatsApp inquiry form.
+- [Process](/#process): Property management process overview.
+- [Transparency](/#transparency): Sample reporting layout and financial record information.
+- [FAQs](/#faqs): Frequently asked questions.
+- [Contact](/#contact): Contact details and WhatsApp draft forms.
+
+## Contact
+
+- Phone: +256 772 883 402
+- Email: didoabepropertycompany@gmail.com
+- WhatsApp: https://wa.me/256772883402

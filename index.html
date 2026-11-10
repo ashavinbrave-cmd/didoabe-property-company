@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      try {
+        if (localStorage.getItem('didoabe-theme') === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      } catch {
+        // Use the default light theme when browser storage is unavailable.
+      }
+    </script>
+    <title>Didoabe Property Company | Professional Property Management Uganda</title>
+    <meta name="description" content="Property management information and WhatsApp inquiry forms for landlords and tenants in Uganda." />
+    <meta property="og:title" content="Didoabe Property Company | Professional Property Management Uganda" />
+    <meta property="og:description" content="Property management information and WhatsApp inquiry forms for landlords and tenants in Uganda." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/aistudio/DIDOABE_LOGO_d8bd4994.jpg" />
+    <meta property="og:url" content="/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/jpeg" href="/assets/aistudio/DIDOABE_LOGO_d8bd4994.jpg" />
+    <script>
+      (() => {
+        const pageUrl = `${window.location.origin}${window.location.pathname}`;
+        const canonical = document.createElement('link');
+        canonical.rel = 'canonical';
+        canonical.href = pageUrl;
+        document.head.append(canonical);
+        document.querySelector('meta[property="og:url"]')?.setAttribute('content', pageUrl);
+        document.querySelector('meta[property="og:image"]')?.setAttribute(
+          'content',
+          `${window.location.origin}/assets/aistudio/DIDOABE_LOGO_d8bd4994.jpg`,
+        );
+      })();
+    </script>
+  </head>
+  <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased selection:bg-sky-500 selection:text-white font-sans transition-colors">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

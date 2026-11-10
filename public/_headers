@@ -1,0 +1,21 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; form-action 'none'; script-src 'self' 'sha256-yKj4+ttqqEpjbmufQ4u3H0gIZ4ywpUBrLGDm54SFrWs=' 'sha256-kR5qN8h7qbUJpbCUnb/L/lYTAnRK8fprPAGql9kHsg4='; style-src 'self'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; upgrade-insecure-requests
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/images/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/assets/aistudio/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400

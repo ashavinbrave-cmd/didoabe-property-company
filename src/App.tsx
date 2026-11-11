@@ -491,6 +491,9 @@ export default function App() {
         onClose={handleCloseLegalModal}
         type={legalModalType}
       />
+            <div className="w-full text-center py-4 text-sm text-slate-500 dark:text-slate-400">
+        Created by <span className="font-semibold">Ainamani Brave Ashavin</span>
+      </div>
     </div>
   );
 }

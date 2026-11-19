@@ -26,6 +26,7 @@ import {
   Clock,
   ArrowRight,
   KeyRound,
+  Download,
 } from 'lucide-react';
 
 const PAGE_METADATA: Record<ActivePage, { title: string; description: string }> = {
@@ -223,6 +224,33 @@ export default function App() {
             <Hero
               onNavigate={navigateTo}
             />
+
+            <section
+              aria-labelledby="vacant-houses-download-title"
+              className="py-10 bg-sky-50 dark:bg-slate-900 border-y border-sky-100 dark:border-slate-800 transition-colors"
+            >
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 rounded-2xl border border-sky-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 sm:p-8 shadow-sm">
+                  <div className="max-w-2xl">
+                    <p className="text-xs font-bold uppercase tracking-wider text-sky-700 dark:text-sky-400">Vacant Houses</p>
+                    <h2 id="vacant-houses-download-title" className="mt-1 text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
+                      Explore the Vacant Houses package
+                    </h2>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                      Download the package with the Vacant Houses page components, sample listings, images, and integration notes.
+                    </p>
+                  </div>
+                  <a
+                    href="/downloads/vacant-houses-integration.zip"
+                    download="vacant-houses-integration.zip"
+                    className="inline-flex min-h-12 w-full sm:w-auto shrink-0 items-center justify-center gap-2 rounded-xl bg-sky-700 px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
+                  >
+                    <Download className="h-4 w-4" aria-hidden="true" />
+                    Download Vacant Houses Package
+                  </a>
+                </div>
+              </div>
+            </section>
 
             {/* 2. Direct Landlord Quick Access Station */}
             <LandlordQuickAccess

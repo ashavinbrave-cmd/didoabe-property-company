@@ -4,7 +4,8 @@ A lightweight React and Vite website for Didoabe Property Company. The public si
 
 ## Features
 
-- Home, about, services, landlord, tenant, process, reporting information, FAQ, and contact sections.
+- Home, about, services, landlord, tenant, process, reporting information, FAQ, contact, and Vacant Houses sections.
+- A homepage Vacant Houses carousel and a dedicated listings page available from desktop and mobile navigation. Included listings are labelled demonstrations, not confirmed Didoabe vacancies.
 - Responsive navigation and light/dark display themes.
 - A browser-only rental income scenario calculator. It has no prefilled rent or fee rate and uses only values entered by the visitor.
 - Contact forms validate locally and prepare WhatsApp drafts. The visitor must review the draft and press **Send** in WhatsApp before the company receives it. Telephone, email, and map links are also provided.
@@ -28,7 +29,9 @@ npm ci
 npm run dev
 ```
 
-Vite serves the site at `http://localhost:3000`. For temporary testing from another device on the same network, run `npm run dev:lan`; this exposes the development server to the local network.
+Vite opens the homepage at `http://localhost:3000`. The homepage carousel advances automatically in both directions; the Vacant Houses page is available from the navigation. For temporary testing from another device on the same network, run `npm run dev:lan`; this exposes the development server to the local network.
+
+The included listings are demonstration data only. Application and vacancy inquiry handlers are connection points for Didoabe's private Management System and are not connected in this repository. WhatsApp, telephone, email, and office address values remain placeholders and are not linked until all official contact details are supplied and verified.
 
 ## Checks
 
@@ -57,3 +60,4 @@ The site generates its canonical URL from the deployed origin. A sitemap with ab
 From the project root, run `./scripts/package-source.ps1`. The script excludes `node_modules`, `dist`, `.aistudio`, existing release archives, environment files, and ZIP files. Deploy `dist/`; do not upload the source archive as the site.
 
 `src/assets/images/` mirrors the base JPEG photos in `public/assets/images/`; smaller responsive variants are stored beside the published base images. These copies are not full-resolution photographic originals.
+

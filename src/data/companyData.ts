@@ -1,4 +1,4 @@
-import { PropertyService, ProcessStep, FaqItem } from '../types/index';
+import type { PropertyService, ProcessStep, FaqItem } from '../types/index';
 
 export const COMPANY_INFO = {
   name: 'Didoabe Property Company',
@@ -403,3 +403,4 @@ export const FAQS_DATA: FaqItem[] = [
     answer: 'Rent follow-up steps depend on the tenancy and management arrangements. Property owners should ask the company about its current process and responsibilities before entering an agreement.',
   },
 ];
+

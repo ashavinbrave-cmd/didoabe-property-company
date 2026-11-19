@@ -1,4 +1,4 @@
-import { RemittanceCalculation } from '../types/index';
+import type { RemittanceCalculation } from '../types/index';
 
 /**
  * Calculates a percentage fee from user-entered scenario values.
@@ -42,3 +42,4 @@ export function formatUGX(amount: number): string {
   if (!Number.isFinite(amount)) return 'UGX 0';
   return 'UGX ' + Math.round(amount).toLocaleString('en-US');
 }
+

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TenantTicket } from '../types/index';
+import type { TenantTicket } from '../types/index';
 import { validateTenantTicket } from '../utils/validation';
 import { buildInquiryWhatsAppUrl, generateInquiryReference, openWhatsAppDraft } from '../utils/inquiry';
 import { InquiryPrivacyNotice, WhatsAppDraftNotice } from './InquiryFeedback';
@@ -349,3 +349,4 @@ export const TenantSection: React.FC = () => {
     </div>
   );
 };
+

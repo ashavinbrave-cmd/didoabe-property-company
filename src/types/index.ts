@@ -7,6 +7,7 @@ export type ActivePage =
   | 'process'
   | 'transparency'
   | 'faqs'
+  | 'vacant-houses'
   | 'contact';
 
 export interface PropertyService {
@@ -75,3 +76,4 @@ export interface RemittanceCalculation {
   serviceDeductions: number;
   netRemittance: number;
 }
+

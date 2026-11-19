@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 9446)
+Total output lines: 720
+
 import React, { useRef, useState } from 'react';
 import { COMPANY_INFO } from '../data/companyData';
 import {
@@ -7,7 +10,7 @@ import {
 } from '../utils/validation';
 import { buildInquiryWhatsAppUrl, generateInquiryReference, openWhatsAppDraft } from '../utils/inquiry';
 import { InquiryPrivacyNotice, WhatsAppDraftNotice } from './InquiryFeedback';
-import { GeneralMessage, LandlordInquiry, TenantTicket } from '../types/index';
+import type { GeneralMessage, LandlordInquiry, TenantTicket } from '../types/index';
 import {
   Phone,
   MapPin,
@@ -294,185 +297,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ headingLevel = '
 
             <button
               ref={(element) => { tabRefs.current[1] = element; }}
-              id="contact-tab-information"
-              role="tab"
-              aria-controls="contact-panel-information"
-              aria-selected={activeTab === 'information'}
-              tabIndex={activeTab === 'information' ? 0 : -1}
-              onKeyDown={(event) => handleTabKeyDown(event, 1)}
-              onClick={() => selectTab('information')}
-              type="button"
-              className={`min-h-11 px-3 sm:px-5 py-3 rounded-t-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
-                activeTab === 'information'
-                  ? 'bg-white dark:bg-slate-800 text-sky-950 dark:text-sky-400 shadow'
-                  : 'text-sky-200 hover:text-white hover:bg-sky-900'
-              }`}
-            >
-              <Info className="w-4 h-4 text-sky-500" />
-              <span>2. Request Information</span>
-            </button>
-
-            <button
-              ref={(element) => { tabRefs.current[2] = element; }}
-              id="contact-tab-tenant"
-              role="tab"
-              aria-controls="contact-panel-tenant"
-              aria-selected={activeTab === 'tenant'}
-              tabIndex={activeTab === 'tenant' ? 0 : -1}
-              onKeyDown={(event) => handleTabKeyDown(event, 2)}
-              onClick={() => selectTab('tenant')}
-              type="button"
-              className={`min-h-11 px-3 sm:px-5 py-3 rounded-t-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
-                activeTab === 'tenant'
-                  ? 'bg-white dark:bg-slate-800 text-sky-950 dark:text-sky-400 shadow'
-                  : 'text-sky-200 hover:text-white hover:bg-sky-900'
-              }`}
-            >
-              <Wrench className="w-4 h-4 text-sky-500" />
-              <span>3. Tenant Inquiry</span>
-            </button>
-          </div>
-
-          <div className="p-6 sm:p-10">
-            {/* Tab 1: Inquire About Property Management Services */}
-            {activeTab === 'management' && (
-              <div id="contact-panel-management" role="tabpanel" aria-labelledby="contact-tab-management" tabIndex={0}>
-              <form onSubmit={handleLandlordSubmit} onChangeCapture={() => { setWhatsAppDraft(null); setErrors({}); }} className="space-y-6 max-w-3xl">
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">
-                    Inquire About Property Management Services
-                  </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
-                    Tell us about your property. Prepare a WhatsApp message to send your inquiry to our team.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="c-mgmt-name" className="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">
-                      Owner Name *
-                    </label>
-                    <input
-                      id="c-mgmt-name"
-                      type="text"
-                      maxLength={100}
-                      required
-                      value={landlordData.fullName || ''}
-                      onChange={(e) => setLandlordData({ ...landlordData, fullName: e.target.value })}
-                      placeholder="e.g. Juliet Nabukeera"
-                      className="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm focus:ring-2 focus:ring-sky-500 bg-white dark:bg-slate-800 dark:text-white"
-                    />
-                    {errors.fullName && <p role="alert" className="text-xs text-rose-600 mt-1">{errors.fullName}</p>}
-                  </div>
-
-                  <div>
-                    <label htmlFor="c-mgmt-phone" className="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">
-                      Phone Number *
-                    </label>
-                    <input
-                      id="c-mgmt-phone"
-                      type="tel"
-                      maxLength={25}
-                      required
-                      value={landlordData.phone || ''}
-                      onChange={(e) => setLandlordData({ ...landlordData, phone: e.target.value })}
-                      placeholder="e.g. +256 772 883 402"
-                      className="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm focus:ring-2 focus:ring-sky-500 bg-white dark:bg-slate-800 dark:text-white"
-                    />
-                    {errors.phone && <p role="alert" className="text-xs text-rose-600 mt-1">{errors.phone}</p>}
-                  </div>
-
-                  <div>
-                    <label htmlFor="c-mgmt-location" className="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">
-                      Property Location (District / Suburb) *
-                    </label>
-                    <input
-                      id="c-mgmt-location"
-                      type="text"
-                      maxLength={160}
-                      required
-                      value={landlordData.location || ''}
-                      onChange={(e) => setLandlordData({ ...landlordData, location: e.target.value })}
-                      placeholder="e.g. Katooke, Nakawa, Naguru, Kira"
-                      className="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm focus:ring-2 focus:ring-sky-500 bg-white dark:bg-slate-800 dark:text-white"
-                    />
-                    {errors.location && <p role="alert" className="text-xs text-rose-600 mt-1">{errors.location}</p>}
-                  </div>
-
-                  <div>
-                    <label htmlFor="c-mgmt-units" className="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">
-                      Number of Units *
-                    </label>
-                    <input
-                      id="c-mgmt-units"
-                      type="number"
-                      min="1"
-                      max="500"
-                      step="1"
-                      required
-                      value={landlordUnitsInput}
-                      onChange={(e) => handleLandlordUnitsChange(e.target.value)}
-                      onBlur={normalizeLandlordUnits}
-                      className="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm focus:ring-2 focus:ring-sky-500 bg-white dark:bg-slate-800 dark:text-white"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="c-mgmt-notes" className="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">
-                    Special notes or management requirements
-                  </label>
-                  <textarea
-                    id="c-mgmt-notes"
-                    rows={3}
-                    maxLength={1200}
-                    value={landlordData.notes || ''}
-                    onChange={(e) => setLandlordData({ ...landlordData, notes: e.target.value })}
-                    placeholder="Details about an existing tenancy, payment questions, or remote communication requests..."
-                    className="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm focus:ring-2 focus:ring-sky-500 bg-white dark:bg-slate-800 dark:text-white"
-                  />
-                </div>
-
-                <InquiryPrivacyNotice />
-
-                <button
-                  type="submit"
-                  className="px-6 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-sm shadow transition-all flex items-center gap-2 cursor-pointer"
-                >
-                  <Building className="w-4 h-4 text-white" />
-                  <span>Prepare WhatsApp Inquiry</span>
-                </button>
-                {whatsAppDraft && <WhatsAppDraftNotice href={whatsAppDraft.href} reference={whatsAppDraft.reference} />}
-              </form>
-              </div>
-            )}
-
-            {/* Tab 2: Request Information */}
-            {activeTab === 'information' && (
-              <div id="contact-panel-information" role="tabpanel" aria-labelledby="contact-tab-information" tabIndex={0}>
-              <form onSubmit={handleGeneralSubmit} onChangeCapture={() => { setWhatsAppDraft(null); setErrors({}); }} className="space-y-6 max-w-3xl">
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">
-                    Request Information
-                  </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
-                    Use this form to request brochures, fee schedules, partnership information, or general answers.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="gen-fullName" className="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">
-                      Full Name *
-                    </label>
-                    <input
-                      id="gen-fullName"
-                      type="text"
-                      maxLength={100}
-                      required
-                      value={generalData.fullName || ''}
-                      onChange={(e) => setGeneralData({ ...generalData, fullName: e.target.value })}
-                      placeholder="e.g. Dennis Kasozi"
+              id="contac…2446 tokens truncated… Kasozi"
                       className={`w-full px-4 py-2.5 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 bg-white dark:bg-slate-800 dark:text-white ${
                         errors.fullName ? 'border-rose-500 bg-rose-50/50' : 'border-slate-300 dark:border-slate-700'
                       }`}
@@ -717,3 +542,4 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ headingLevel = '
     </div>
   );
 };
+

@@ -1,0 +1,20 @@
+/* Scoped styles for the Vacant Houses feature. Nothing here is global:
+   every rule is under .vh-page so the rest of the site is unaffected.
+   Override --vh-font-display / --vh-font-body to match site typography. */
+.vh-page { font-family: var(--vh-font-body, inherit); }
+.vh-page h1, .vh-page h2, .vh-page h3, .vh-page h4, .vh-page .font-display {
+  font-family: var(--vh-font-display, inherit);
+}
+@keyframes vh-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.vh-page .vh-fade-up { animation: vh-fade-up 0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.vh-page .vh-fade-up-delayed { animation: vh-fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both; }
+@media (prefers-reduced-motion: reduce) {
+  .vh-page *, .vh-page *::before, .vh-page *::after {
+    animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important; scroll-behavior: auto !important;
+  }
+}
+

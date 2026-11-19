@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivePage } from '../types/index';
+import type { ActivePage } from '../types/index';
 import {
   Building,
   Calculator,
@@ -163,3 +163,4 @@ export const LandlordQuickAccess: React.FC<LandlordQuickAccessProps> = ({
     </section>
   );
 };
+

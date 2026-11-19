@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { RemittanceCalculator } from './RemittanceCalculator';
 import { OptimizedImage } from './OptimizedImage';
-import { LandlordInquiry } from '../types/index';
+import type { LandlordInquiry } from '../types/index';
 import { validateLandlordInquiry } from '../utils/validation';
 import { buildInquiryWhatsAppUrl, generateInquiryReference, openWhatsAppDraft } from '../utils/inquiry';
 import { InquiryPrivacyNotice, WhatsAppDraftNotice } from './InquiryFeedback';
@@ -542,3 +542,4 @@ export const LandlordSection: React.FC<LandlordSectionProps> = ({
     </div>
   );
 };
+

@@ -1,4 +1,4 @@
-import { LandlordInquiry, TenantTicket, GeneralMessage } from '../types/index';
+import type { LandlordInquiry, TenantTicket, GeneralMessage } from '../types/index';
 
 export function isValidEmail(email: string): boolean {
   if (!email || typeof email !== 'string') return false;
@@ -142,4 +142,5 @@ export function validateGeneralMessage(data: Partial<GeneralMessage>): Validatio
     errors,
   };
 }
+
 

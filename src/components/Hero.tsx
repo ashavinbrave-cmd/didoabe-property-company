@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { COMPANY_INFO, PRIMARY_SERVICES_LIST } from '../data/companyData';
 import { OptimizedImage } from './OptimizedImage';
-import { ActivePage } from '../types/index';
+import type { ActivePage } from '../types/index';
 import {
   ArrowRight,
   Building,

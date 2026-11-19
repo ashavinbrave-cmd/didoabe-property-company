@@ -1,4 +1,4 @@
-import { RemittanceCalculation } from '../types/index';
+import type { RemittanceCalculation } from '../types/index';
 
 /**
  * Calculates a percentage fee from user-entered scenario values.

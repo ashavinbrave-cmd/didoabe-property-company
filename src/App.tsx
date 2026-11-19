@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useState, useEffect, useCallback, useRef } from 'react';
-import { ActivePage } from './types/index';
+import type { ActivePage } from './types/index';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Hero } from './components/Hero';
@@ -13,6 +13,9 @@ import { ProcessSection } from './components/ProcessSection';
 import { TransparencySection } from './components/TransparencySection';
 const AboutSection = lazy(() => import('./components/AboutSection').then((module) => ({ default: module.AboutSection })));
 import { ContactSection } from './components/ContactSection';
+import { FeaturedHouses } from './features/vacant-houses/components/FeaturedHouses';
+import { VacantHousesPage } from './features/vacant-houses';
+import { SAMPLE_VACANT_HOUSES } from './features/vacant-houses/data/vacantHousesData';
 import { FaqSection } from './components/FaqSection';
 import { RemittanceCalculator } from './components/RemittanceCalculator';
 import { LegalModal } from './components/LegalModals';
@@ -26,7 +29,6 @@ import {
   Clock,
   ArrowRight,
   KeyRound,
-  Download,
 } from 'lucide-react';
 
 const PAGE_METADATA: Record<ActivePage, { title: string; description: string }> = {
@@ -38,6 +40,7 @@ const PAGE_METADATA: Record<ActivePage, { title: string; description: string }> 
   process: { title: 'Management Process | Didoabe Property Company', description: 'Review the property management process and prepare an inquiry for Didoabe Property Company.' },
   transparency: { title: 'Financial Transparency | Didoabe Property Company', description: 'View sample reporting information and prepare a property management inquiry.' },
   faqs: { title: 'Frequently Asked Questions | Didoabe Property Company', description: 'Find answers to common property management questions or prepare an inquiry.' },
+  'vacant-houses': { title: 'Vacant Houses | Didoabe Property Company', description: 'Browse clearly labelled demonstration listings and vacant house information from Didoabe Property Company.' },
   contact: { title: 'Contact | Didoabe Property Company', description: 'Contact information and WhatsApp draft forms for Didoabe Property Company.' },
 };
 
@@ -64,6 +67,7 @@ class RouteLoadErrorBoundary extends React.Component<{ children: React.ReactNode
 
 export default function App() {
   const [activePage, setActivePage] = useState<ActivePage>('home');
+  const [initialVacantHouseId, setInitialVacantHouseId] = useState<string | null>(null);
   const [selectedServiceInquiry, setSelectedServiceInquiry] = useState<string | null>(null);
   const [scrollToLandlordForm, setScrollToLandlordForm] = useState(false);
   const consultationScrollPendingRef = useRef(false);
@@ -135,6 +139,7 @@ export default function App() {
         'process',
         'transparency',
         'faqs',
+        'vacant-houses',
         'contact',
       ];
       const isValidPage = validPages.includes(rawHash as ActivePage);
@@ -145,6 +150,7 @@ export default function App() {
       }
 
       setActivePage(nextPage);
+      if (nextPage !== 'vacant-houses') setInitialVacantHouseId(null);
       if (nextPage !== 'landlords') {
         setSelectedServiceInquiry(null);
         setScrollToLandlordForm(false);
@@ -175,6 +181,7 @@ export default function App() {
   }, []);
 
   const navigateTo = (page: ActivePage) => {
+    if (page !== 'vacant-houses') setInitialVacantHouseId(null);
     if (page !== 'landlords') setSelectedServiceInquiry(null);
     setActivePage(page);
     window.location.hash = page;
@@ -225,32 +232,13 @@ export default function App() {
               onNavigate={navigateTo}
             />
 
-            <section
-              aria-labelledby="vacant-houses-download-title"
-              className="py-10 bg-sky-50 dark:bg-slate-900 border-y border-sky-100 dark:border-slate-800 transition-colors"
-            >
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 rounded-2xl border border-sky-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 sm:p-8 shadow-sm">
-                  <div className="max-w-2xl">
-                    <p className="text-xs font-bold uppercase tracking-wider text-sky-700 dark:text-sky-400">Vacant Houses</p>
-                    <h2 id="vacant-houses-download-title" className="mt-1 text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
-                      Explore the Vacant Houses package
-                    </h2>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                      Download the package with the Vacant Houses page components, sample listings, images, and integration notes.
-                    </p>
-                  </div>
-                  <a
-                    href="/downloads/vacant-houses-integration.zip"
-                    download="vacant-houses-integration.zip"
-                    className="inline-flex min-h-12 w-full sm:w-auto shrink-0 items-center justify-center gap-2 rounded-xl bg-sky-700 px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
-                  >
-                    <Download className="h-4 w-4" aria-hidden="true" />
-                    Download Vacant Houses Package
-                  </a>
-                </div>
-              </div>
-            </section>
+            <FeaturedHouses
+              properties={SAMPLE_VACANT_HOUSES}
+              onViewDetails={(property) => {
+                setInitialVacantHouseId(property.id);
+                navigateTo('vacant-houses');
+              }}
+            />
 
             {/* 2. Direct Landlord Quick Access Station */}
             <LandlordQuickAccess
@@ -461,6 +449,10 @@ export default function App() {
 
         {activePage === 'faqs' && (
           <FaqSection onContactClick={() => navigateTo('contact')} headingLevel="h1" />
+        )}
+
+        {activePage === 'vacant-houses' && (
+          <VacantHousesPage initialSelectedPropertyId={initialVacantHouseId} />
         )}
 
         {activePage === 'contact' && <ContactSection />}

@@ -7,6 +7,7 @@ export type ActivePage =
   | 'process'
   | 'transparency'
   | 'faqs'
+  | 'vacant-houses'
   | 'contact';
 
 export interface PropertyService {

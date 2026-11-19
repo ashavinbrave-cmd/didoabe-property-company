@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivePage } from '../types/index';
+import type { ActivePage } from '../types/index';
 import {
   Building,
   Calculator,

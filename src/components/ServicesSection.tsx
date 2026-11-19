@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { COMPANY_INFO, SERVICES_DATA } from '../data/companyData';
-import { PropertyService } from '../types/index';
+import type { PropertyService } from '../types/index';
 import {
   Building2,
   Banknote,

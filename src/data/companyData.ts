@@ -1,4 +1,4 @@
-import { PropertyService, ProcessStep, FaqItem } from '../types/index';
+import type { PropertyService, ProcessStep, FaqItem } from '../types/index';
 
 export const COMPANY_INFO = {
   name: 'Didoabe Property Company',

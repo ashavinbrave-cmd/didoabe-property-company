@@ -4,14 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port=3000",
+    "dev": "vite --port=3000 --open",
     "dev:lan": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
     "clean": "node --input-type=module -e \"import { rmSync } from 'node:fs'; rmSync('dist',{recursive:true,force:true})\"",
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.node.json",
     "lint": "npm run typecheck",
-    "test": "node --import ./scripts/test-env.mjs --import tsx --test src/utils/calculator.test.ts src/utils/validation.test.ts src/utils/inquiry.test.ts"
+    "test": "node --import ./scripts/test-env.mjs --import tsx --test src/utils/calculator.test.ts src/utils/validation.test.ts src/utils/inquiry.test.ts src/features/vacant-houses/integrations/managementPortalAdapter.test.ts"
   },
   "dependencies": {
     "lucide-react": "^0.546.0",
@@ -30,3 +30,4 @@
     "vite": "^8.3.0"
   }
 }
+

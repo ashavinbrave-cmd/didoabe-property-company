@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { COMPANY_INFO } from '../data/companyData';
-import { ActivePage } from '../types/index';
+import type { ActivePage } from '../types/index';
 import { OptimizedImage } from './OptimizedImage';
 import {
   Phone,
@@ -36,6 +36,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'Home', page: 'home' },
     { label: 'About Us', page: 'about' },
     { label: 'Our Services', page: 'services' },
+    { label: 'Vacant Houses', page: 'vacant-houses' },
     { label: 'For Landlords', page: 'landlords', highlight: true },
     { label: 'For Tenants', page: 'tenants' },
     { label: 'Process', page: 'process' },

@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { OptimizedImage } from './OptimizedImage';
-import { ActivePage } from '../types/index';
+import type { ActivePage } from '../types/index';
 import { ArrowRight, Building2, Camera } from 'lucide-react';
 
 interface ManagedPropertyShowcaseProps {

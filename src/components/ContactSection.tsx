@@ -7,7 +7,7 @@ import {
 } from '../utils/validation';
 import { buildInquiryWhatsAppUrl, generateInquiryReference, openWhatsAppDraft } from '../utils/inquiry';
 import { InquiryPrivacyNotice, WhatsAppDraftNotice } from './InquiryFeedback';
-import { GeneralMessage, LandlordInquiry, TenantTicket } from '../types/index';
+import type { GeneralMessage, LandlordInquiry, TenantTicket } from '../types/index';
 import {
   Phone,
   MapPin,

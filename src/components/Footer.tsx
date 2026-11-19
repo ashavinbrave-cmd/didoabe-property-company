@@ -1,6 +1,6 @@
 import React from 'react';
 import { COMPANY_INFO } from '../data/companyData';
-import { ActivePage } from '../types/index';
+import type { ActivePage } from '../types/index';
 import { OptimizedImage } from './OptimizedImage';
 import {
   Phone,

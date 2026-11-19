@@ -8,6 +8,7 @@ import {
   hasVerifiedWhatsApp,
   isValidPhoneNumber,
 } from '../utils/formatters';
+import { isValidEmail } from '../../../utils/validation';
 import { ResilientImage } from './ResilientImage';
 
 interface EmptyStateProps {
@@ -24,14 +25,18 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   onSubmitInquiry,
 }) => {
   const [preferredLocation, setPreferredLocation] = useState('');
+  const [visitorName, setVisitorName] = useState('');
+  const [visitorEmail, setVisitorEmail] = useState('');
   const [telephoneNumber, setTelephoneNumber] = useState('');
-  const [errors, setErrors] = useState<{ location?: string; phone?: string }>({});
+  const [errors, setErrors] = useState<{ name?: string; email?: string; location?: string; phone?: string }>({});
   const [submissionError, setSubmissionError] = useState<string | null>(null);
   const [submittedPayload, setSubmittedPayload] = useState<VacantInquiryPayload | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = (): boolean => {
-    const nextErrors: { location?: string; phone?: string } = {};
+    const nextErrors: { name?: string; email?: string; location?: string; phone?: string } = {};
+    if (visitorName.trim().length < 2) nextErrors.name = 'Please enter your name.';
+    if (!isValidEmail(visitorEmail.trim())) nextErrors.email = 'Please enter a valid email address.';
     if (preferredLocation.trim().length < 2) {
       nextErrors.location = 'Please enter your preferred area or town in Uganda.';
     }
@@ -47,6 +52,8 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
     if (!validate()) return;
 
     const payload: VacantInquiryPayload = {
+      visitorName: visitorName.trim(),
+      visitorEmail: visitorEmail.trim(),
       preferredLocation: preferredLocation.trim(),
       telephoneNumber: telephoneNumber.trim(),
       submittedAt: new Date().toISOString(),
@@ -167,6 +174,16 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
           ) : (
             <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="empty-visitor-name" className="block text-xs font-semibold text-[#031130]/80 mb-1.5">Your name <span className="text-[#185DF1]">*</span></label>
+                  <input id="empty-visitor-name" autoComplete="name" value={visitorName} onChange={(e) => { setVisitorName(e.target.value); setSubmissionError(null); if (errors.name) setErrors({ ...errors, name: undefined }); }} placeholder="Your full name" className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-[#F3F7FE] border border-[#031130]/15 text-sm text-[#031130] placeholder:text-[#031130]/45 focus:outline-none focus:bg-white focus:border-[#185DF1] focus:ring-2 focus:ring-[#185DF1]/20" />
+                  {errors.name && <p className="mt-1 text-xs text-red-700 font-medium">{errors.name}</p>}
+                </div>
+                <div>
+                  <label htmlFor="empty-visitor-email" className="block text-xs font-semibold text-[#031130]/80 mb-1.5">Email address <span className="text-[#185DF1]">*</span></label>
+                  <input id="empty-visitor-email" type="email" autoComplete="email" value={visitorEmail} onChange={(e) => { setVisitorEmail(e.target.value); setSubmissionError(null); if (errors.email) setErrors({ ...errors, email: undefined }); }} placeholder="you@example.com" className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-[#F3F7FE] border border-[#031130]/15 text-sm text-[#031130] placeholder:text-[#031130]/45 focus:outline-none focus:bg-white focus:border-[#185DF1] focus:ring-2 focus:ring-[#185DF1]/20" />
+                  {errors.email && <p className="mt-1 text-xs text-red-700 font-medium">{errors.email}</p>}
+                </div>
                 <div>
                   <label
                     htmlFor="empty-preferred-location"

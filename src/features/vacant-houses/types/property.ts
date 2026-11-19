@@ -46,15 +46,59 @@ export interface PropertyApplicationPayload {
   propertyLocation: string;
   monthlyRentUgx: number;
   applicantFullName: string;
+  applicantEmail: string;
   telephoneNumber: string;
   preferredAlternativeLocation: string;
   submittedAt: string;
 }
 
+/** Exact public property fields exposed by the private portal API. */
+export interface ManagementPortalProperty {
+  id: string;
+  name: string;
+  location: string;
+  district: string;
+  propertyType: string;
+  price: number;
+  depositTerms: string;
+  status: 'Available' | 'Occupied' | 'Unavailable';
+  isPublished: boolean;
+  bedrooms: number;
+  bathrooms: number;
+  photos: Array<{ url: string; caption?: string }>;
+  description: string;
+  conditions: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+/** Request shape accepted by the private portal's public application endpoint. */
+export interface ManagementPortalApplicationRequest {
+  propertyId: string;
+  propertyName: string;
+  applicantName: string;
+  applicantEmail: string;
+  applicantPhone: string;
+  occupation: string;
+  moveInDate: string;
+  householdSize: number;
+  message: string;
+}
+
 export interface VacantInquiryPayload {
+  visitorName: string;
+  visitorEmail: string;
   preferredLocation: string;
   telephoneNumber: string;
   submittedAt: string;
+}
+
+export interface ManagementPortalInquiryRequest {
+  visitorName: string;
+  visitorEmail: string;
+  visitorPhone: string;
+  subject: string;
+  message: string;
 }
 
 export interface DidoabeContactConfig {

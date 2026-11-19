@@ -18,6 +18,7 @@ import {
   hasVerifiedWhatsApp,
   isValidPhoneNumber,
 } from '../utils/formatters';
+import { isValidEmail } from '../../../utils/validation';
 
 interface ApplicationFormProps {
   property: PropertyListing;
@@ -33,6 +34,7 @@ interface ApplicationFormProps {
 
 interface FormErrors {
   fullName?: string;
+  email?: string;
   telephoneNumber?: string;
 }
 
@@ -42,6 +44,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
   onSubmitApplication,
 }) => {
   const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
   const [telephoneNumber, setTelephoneNumber] = useState('');
   const [preferredAlternativeLocation, setPreferredAlternativeLocation] = useState('');
   const [errors, setErrors] = useState<FormErrors>({});
@@ -55,6 +58,9 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
     const nextErrors: FormErrors = {};
     if (fullName.trim().length < 2) {
       nextErrors.fullName = 'Please enter your full name.';
+    }
+    if (!isValidEmail(email.trim())) {
+      nextErrors.email = 'Please enter a valid email address.';
     }
     if (!isValidPhoneNumber(telephoneNumber)) {
       nextErrors.telephoneNumber =
@@ -71,6 +77,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
     propertyLocation: property.location,
     monthlyRentUgx: property.monthlyRentUgx,
     applicantFullName: fullName.trim(),
+    applicantEmail: email.trim(),
     telephoneNumber: telephoneNumber.trim(),
     preferredAlternativeLocation: preferredAlternativeLocation.trim(),
     submittedAt: new Date().toISOString(),
@@ -150,6 +157,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
         propertyLocation: property.location,
         monthlyRentUgx: property.monthlyRentUgx,
         applicantFullName: fullName.trim() || '(Not yet entered)',
+        applicantEmail: email.trim() || '(Not yet entered)',
         telephoneNumber: telephoneNumber.trim() || '(Not yet entered)',
         preferredAlternativeLocation: preferredAlternativeLocation.trim(),
       });
@@ -226,7 +234,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
                   ? 'Your application details have been formatted for WhatsApp. If WhatsApp did not open automatically, use the button below.'
                   : onSubmitApplication
                   ? 'Your application payload has been passed to the connected Didoabe Property Management System handler.'
-                  : 'This standalone Vacant Houses page is not yet connected to Didoabe’s live Property Management System backend, so this application has NOT been transmitted or stored on a server. Connect the onSubmitApplication prop during integration, or apply immediately through WhatsApp below.'}
+                  : 'This standalone page is not connected yet. Your details were not transmitted or stored. The connection can be enabled after the private management portal is configured.'}
               </p>
             </div>
           </div>
@@ -235,6 +243,10 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
             <p>
               <strong className="text-[#031130]">Applicant:</strong>{' '}
               {submittedPayload.applicantFullName}
+            </p>
+            <p className="tabular-nums">
+              <strong className="text-[#031130]">Email:</strong>{' '}
+              {submittedPayload.applicantEmail}
             </p>
             <p className="tabular-nums">
               <strong className="text-[#031130]">Telephone:</strong>{' '}
@@ -335,6 +347,27 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
                 </p>
               )}
             </div>
+          </div>
+
+          <div>
+            <label htmlFor="applicant-email" className="block text-xs font-semibold text-[#031130]/85 mb-1.5">
+              Email address <span className="text-[#185DF1]">*</span>
+            </label>
+            <input
+              id="applicant-email"
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setSubmissionError(null);
+                if (errors.email) setErrors({ ...errors, email: undefined });
+              }}
+              placeholder="you@example.com"
+              className="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl bg-[#F3F7FE] border border-[#031130]/15 text-sm text-[#031130] placeholder:text-[#031130]/45 focus:outline-none focus:bg-white focus:border-[#185DF1] focus:ring-2 focus:ring-[#185DF1]/20"
+            />
+            {errors.email && <p className="mt-1.5 text-xs text-red-700 font-medium">{errors.email}</p>}
           </div>
 
           {/* 3. Preferred Alternative Location */}

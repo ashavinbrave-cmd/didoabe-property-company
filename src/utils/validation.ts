@@ -143,4 +143,3 @@ export function validateGeneralMessage(data: Partial<GeneralMessage>): Validatio
   };
 }
 
-

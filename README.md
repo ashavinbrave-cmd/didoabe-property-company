@@ -60,4 +60,3 @@ The site generates its canonical URL from the deployed origin. A sitemap with ab
 From the project root, run `./scripts/package-source.ps1`. The script excludes `node_modules`, `dist`, `.aistudio`, existing release archives, environment files, and ZIP files. Deploy `dist/`; do not upload the source archive as the site.
 
 `src/assets/images/` mirrors the base JPEG photos in `public/assets/images/`; smaller responsive variants are stored beside the published base images. These copies are not full-resolution photographic originals.
-

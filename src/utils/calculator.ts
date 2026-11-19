@@ -42,4 +42,3 @@ export function formatUGX(amount: number): string {
   if (!Number.isFinite(amount)) return 'UGX 0';
   return 'UGX ' + Math.round(amount).toLocaleString('en-US');
 }
-

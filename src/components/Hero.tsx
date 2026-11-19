@@ -179,4 +179,3 @@ export const Hero: FC<HeroProps> = ({ onNavigate }) => (
     </div>
   </section>
 );
-

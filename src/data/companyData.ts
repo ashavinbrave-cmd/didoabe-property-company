@@ -403,4 +403,3 @@ export const FAQS_DATA: FaqItem[] = [
     answer: 'Rent follow-up steps depend on the tenancy and management arrangements. Property owners should ask the company about its current process and responsibilities before entering an agreement.',
   },
 ];
-

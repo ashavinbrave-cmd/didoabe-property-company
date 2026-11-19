@@ -282,4 +282,3 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPrivacy, onOpe
     </footer>
   );
 };
-

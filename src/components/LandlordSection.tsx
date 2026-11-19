@@ -542,4 +542,3 @@ export const LandlordSection: React.FC<LandlordSectionProps> = ({
     </div>
   );
 };
-

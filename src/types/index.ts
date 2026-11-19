@@ -76,4 +76,3 @@ export interface RemittanceCalculation {
   serviceDeductions: number;
   netRemittance: number;
 }
-

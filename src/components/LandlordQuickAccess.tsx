@@ -163,4 +163,3 @@ export const LandlordQuickAccess: React.FC<LandlordQuickAccessProps> = ({
     </section>
   );
 };
-

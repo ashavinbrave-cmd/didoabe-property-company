@@ -115,4 +115,3 @@ export const ManagedPropertyShowcase: FC<ManagedPropertyShowcaseProps> = ({
     </div>
   </section>
 );
-

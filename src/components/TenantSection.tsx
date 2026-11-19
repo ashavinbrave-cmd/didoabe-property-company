@@ -349,4 +349,3 @@ export const TenantSection: React.FC = () => {
     </div>
   );
 };
-

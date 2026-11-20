@@ -83,13 +83,13 @@ export default function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
       try {
-        const savedTheme = localStorage.getItem('didoabe-theme');
+        const savedTheme = localStorage.getItem('didoabe-theme-v2');
         if (savedTheme === 'dark' || savedTheme === 'light') return savedTheme;
       } catch {
         // Continue with the default theme when browser storage is unavailable.
       }
     }
-    return 'light';
+    return 'dark';
   });
 
   // Apply theme to document element
@@ -101,7 +101,7 @@ export default function App() {
       root.classList.remove('dark');
     }
     try {
-      localStorage.setItem('didoabe-theme', theme);
+      localStorage.setItem('didoabe-theme-v2', theme);
     } catch {
       // Theme switching still works for this session when storage is unavailable.
     }

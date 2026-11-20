@@ -20,14 +20,14 @@
 }
 
 :root {
-  --brand-navy: #0b2545;
-  --brand-navy-dark: #07192f;
-  --brand-light-blue: #38bdf8;
+  --brand-navy: #101f38;
+  --brand-navy-dark: #080f1e;
+  --brand-light-blue: #66d9ff;
   --brand-sky-light: #e0f2fe;
   --brand-sky-soft: #f0f9ff;
-  --brand-blue: #0284c7;
-  --brand-accent-blue: #0ea5e9;
-  --brand-gold: #d97706;
+  --brand-blue: #087fb5;
+  --brand-accent-blue: #22b8ee;
+  --brand-gold: #e5b65c;
   color-scheme: light;
   --page-bg: var(--brand-sky-soft);
   --surface: #ffffff;
@@ -43,16 +43,16 @@
 
 .dark {
   color-scheme: dark;
-  --page-bg: var(--brand-navy-dark);
-  --surface: var(--brand-navy);
-  --surface-muted: #102c4c;
-  --ink: #f8fafc;
-  --muted: #cbd5e1;
-  --line: #334155;
+  --page-bg: #080f1e;
+  --surface: #111d31;
+  --surface-muted: #172941;
+  --ink: #f3f7ff;
+  --muted: #b5c4d8;
+  --line: #293b55;
   --brand: var(--brand-light-blue);
   --brand-deep: var(--brand-navy-dark);
   --accent: var(--brand-gold);
-  --card-shadow: 0 18px 48px rgb(0 0 0 / 22%);
+  --card-shadow: 0 20px 55px rgb(0 0 0 / 28%);
 }
 
 @layer base {
@@ -240,5 +240,87 @@
 @media (hover: none), (pointer: coarse) {
   .property-card-image-control {
     opacity: 1 !important;
+  }
+}
+
+
+/* Refined Didoabe midnight-blue visual system. */
+.dark body {
+  background:
+    radial-gradient(ellipse at 12% 0%, rgb(22 94 145 / 13%), transparent 38rem),
+    radial-gradient(ellipse at 92% 18%, rgb(13 72 112 / 10%), transparent 34rem),
+    var(--page-bg);
+}
+
+.dark .site-shell {
+  background: transparent;
+}
+
+.dark .site-shell > header {
+  background: rgb(12 24 42 / 92%);
+  border-bottom-color: rgb(102 217 255 / 14%);
+  box-shadow: 0 12px 34px rgb(0 0 0 / 24%);
+}
+
+.dark .site-shell main section {
+  border-color: rgb(148 177 207 / 14%);
+}
+
+.dark .site-shell main [class*="border-slate-"],
+.dark .site-shell main [class*="border-sky-"] {
+  border-color: rgb(148 177 207 / 20%);
+}
+
+.dark .site-shell main [class*="bg-slate-900"],
+.dark .site-shell main [class*="bg-slate-950"] {
+  background-color: #0d192b;
+}
+
+.dark .site-shell main [class*="bg-slate-800"] {
+  background-color: #17263b;
+}
+
+.dark .site-shell main [class*="text-sky-300"],
+.dark .site-shell main [class*="text-sky-400"] {
+  color: #83ddff;
+}
+
+.dark .site-shell main button[class*="bg-sky-700"],
+.dark .site-shell main a[class*="bg-sky-700"] {
+  background-image: linear-gradient(135deg, #087eae, #075b89);
+  box-shadow: 0 8px 22px rgb(0 0 0 / 20%);
+}
+
+.dark .site-shell main :where(input, select, textarea) {
+  background-color: #101d30;
+  color: #f3f7ff;
+}
+
+.dark .site-shell main :where(input, select, textarea)::placeholder {
+  color: #91a4bd;
+}
+
+.dark .site-shell main :where(input, select, textarea):focus {
+  border-color: #66d9ff;
+  outline-color: rgb(102 217 255 / 24%);
+}
+
+.dark .site-shell main a:not([class*="bg-"]) {
+  text-underline-offset: 3px;
+}
+
+.dark ::selection {
+  background: #087eae;
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-shell main [class*="shadow-2xl"],
+  .site-shell main [class*="shadow-xl"] {
+    transition: box-shadow 220ms ease, border-color 220ms ease, transform 220ms ease;
+  }
+  .site-shell main [class*="shadow-2xl"]:hover,
+  .site-shell main [class*="shadow-xl"]:hover {
+    box-shadow: 0 24px 58px rgb(0 0 0 / 22%);
   }
 }

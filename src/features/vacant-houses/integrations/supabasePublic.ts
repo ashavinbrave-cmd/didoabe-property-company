@@ -46,8 +46,12 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
     const message = await response.text();
     throw new Error(message || `Supabase request failed (${response.status}).`);
   }
+  // PostgREST may return a successful 201 response with an empty body
+  // when Prefer: return=minimal is used. Do not try to parse empty text as JSON.
   if (response.status === 204) return undefined as T;
-  return response.json() as Promise<T>;
+  const responseText = await response.text();
+  if (!responseText.trim()) return undefined as T;
+  return JSON.parse(responseText) as T;
 }
 
 function mapProperty(row: DatabaseProperty): PropertyListing {

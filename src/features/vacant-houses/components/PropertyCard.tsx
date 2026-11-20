@@ -18,12 +18,22 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 }) => {
   const [imageIndex, setImageIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setPrefersReducedMotion(media.matches);
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
 
   const images = property.images;
   const totalImages = images.length;
 
   useEffect(() => {
-    if (totalImages <= 1 || isPaused) {
+    if (totalImages <= 1 || isPaused || prefersReducedMotion || document.hidden) {
       return;
     }
 
@@ -32,7 +42,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
     }, 4200);
 
     return () => window.clearInterval(timer);
-  }, [totalImages, isPaused]);
+  }, [totalImages, isPaused, prefersReducedMotion]);
 
   const handlePrevImage = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -92,7 +102,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
               type="button"
               onClick={handlePrevImage}
               aria-label={`Previous photo of ${property.name}`}
-              className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-[#031130] flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#185DF1]"
+              className="property-card-image-control absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-[#031130] flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#185DF1]"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -100,7 +110,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
               type="button"
               onClick={handleNextImage}
               aria-label={`Next photo of ${property.name}`}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-[#031130] flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#185DF1]"
+              className="property-card-image-control absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-[#031130] flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#185DF1]"
             >
               <ChevronRight className="w-4 h-4" />
             </button>

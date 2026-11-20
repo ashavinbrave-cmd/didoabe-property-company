@@ -234,3 +234,11 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* Keep photo controls discoverable on touch-first phones and tablets. */
+@media (hover: none), (pointer: coarse) {
+  .property-card-image-control {
+    opacity: 1 !important;
+  }
+}

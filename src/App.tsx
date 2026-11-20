@@ -271,6 +271,7 @@ export default function App() {
                 setInitialVacantHouseId(property.id);
                 navigateTo('vacant-houses');
               }}
+              onViewAll={() => navigateTo('vacant-houses')}
             />
 
             {/* 2. Direct Landlord Quick Access Station */}

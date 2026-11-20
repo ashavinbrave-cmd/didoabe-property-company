@@ -7,13 +7,19 @@ import { PropertyCard } from './PropertyCard';
 interface FeaturedHousesProps {
   properties: PropertyListing[];
   onViewDetails: (property: PropertyListing) => void;
+  onViewAll?: () => void;
 }
 
 export const FeaturedHouses: React.FC<FeaturedHousesProps> = ({
   properties,
   onViewDetails,
+  onViewAll,
 }) => {
-  const featured = properties.filter((p) => p.isFeatured);
+  // Always showcase the five newest live available listings on the homepage.
+  // The public API already filters out unpublished and unavailable properties.
+  const featured = [...properties]
+    .sort((a, b) => new Date(b.addedAt).getTime() - new Date(a.addedAt).getTime())
+    .slice(0, 5);
   const featuredAreDemonstrations = featured.length > 0 && featured.every((property) => property.isSampleData);
   const [visibleCount, setVisibleCount] = useState(3);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -236,6 +242,19 @@ export const FeaturedHouses: React.FC<FeaturedHousesProps> = ({
                 }`}
               />
             ))}
+          </div>
+        )}
+
+        {onViewAll && (
+          <div className="mt-8 flex justify-center">
+            <button
+              type="button"
+              onClick={onViewAll}
+              className="min-h-[48px] inline-flex items-center justify-center gap-2 rounded-xl bg-[#185DF1] px-7 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#144ED0] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#031130] focus-visible:ring-offset-2"
+            >
+              <span>View All Vacant Houses</span>
+              <ChevronRight className="h-4 w-4" aria-hidden="true" />
+            </button>
           </div>
         )}
       </div>

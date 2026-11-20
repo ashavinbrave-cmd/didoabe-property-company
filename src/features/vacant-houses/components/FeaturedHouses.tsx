@@ -244,6 +244,19 @@ export const FeaturedHouses: React.FC<FeaturedHousesProps> = ({
             ))}
           </div>
         )}
+
+        {onViewAll && (
+          <div className="mt-8 flex justify-center">
+            <button
+              type="button"
+              onClick={onViewAll}
+              className="min-h-[48px] inline-flex items-center justify-center gap-2 rounded-xl bg-[#185DF1] px-7 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#144ED0] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#031130] focus-visible:ring-offset-2"
+            >
+              <span>View All Vacant Houses</span>
+              <ChevronRight className="h-4 w-4" aria-hidden="true" />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import type React from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowUpDown, RotateCcw } from 'lucide-react';
 import type {
   DidoabeContactConfig,
@@ -36,6 +37,16 @@ export const AllAvailableHouses: React.FC<AllAvailableHousesProps> = ({
   isDemonstrationDataset,
   onSubmitInquiry,
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 12;
+  const pageCount = Math.max(1, Math.ceil(filteredProperties.length / pageSize));
+  const pageStart = (currentPage - 1) * pageSize;
+  const pageProperties = filteredProperties.slice(pageStart, pageStart + pageSize);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filteredProperties]);
+
   const isFilteredEmpty = totalInventoryCount > 0 && filteredProperties.length === 0;
 
   return (
@@ -60,8 +71,8 @@ export const AllAvailableHouses: React.FC<AllAvailableHousesProps> = ({
               All Available Houses
             </h2>
             <p className="mt-1.5 text-sm text-[#031130]/70 tabular-nums">
-              Showing {filteredProperties.length} of {totalInventoryCount}{' '}
-              {totalInventoryCount === 1 ? 'listing' : 'listings'}
+              Showing {filteredProperties.length === 0 ? 0 : pageStart + 1}–{Math.min(pageStart + pageSize, filteredProperties.length)} of {filteredProperties.length}{' '}
+              {filteredProperties.length === 1 ? 'listing' : 'listings'} (from {totalInventoryCount} available)
               {hasActiveFilters ? ' matching your filters' : ''}
             </p>
           </div>
@@ -131,7 +142,7 @@ export const AllAvailableHouses: React.FC<AllAvailableHousesProps> = ({
           />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {filteredProperties.map((property) => (
+            {pageProperties.map((property) => (
               <PropertyCard
                 key={property.id}
                 property={property}
@@ -139,6 +150,30 @@ export const AllAvailableHouses: React.FC<AllAvailableHousesProps> = ({
               />
             ))}
           </div>
+        )}
+
+        {!isUpdating && pageCount > 1 && (
+          <nav className="mt-9 flex flex-wrap items-center justify-center gap-2" aria-label="House listing pages">
+            <button
+              type="button"
+              onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+              disabled={currentPage === 1}
+              className="min-h-[44px] rounded-lg border border-[#031130]/15 px-4 py-2 text-sm font-semibold text-[#031130] disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Previous
+            </button>
+            <span className="px-3 text-sm font-medium text-[#031130]/75" aria-live="polite">
+              Page {currentPage} of {pageCount}
+            </span>
+            <button
+              type="button"
+              onClick={() => setCurrentPage((page) => Math.min(pageCount, page + 1))}
+              disabled={currentPage === pageCount}
+              className="min-h-[44px] rounded-lg border border-[#031130]/15 px-4 py-2 text-sm font-semibold text-[#031130] disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Next
+            </button>
+          </nav>
         )}
       </div>
     </section>

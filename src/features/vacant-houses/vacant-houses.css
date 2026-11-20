@@ -18,3 +18,86 @@
   }
 }
 
+
+
+/* Dark-mode contrast fixes for every vacant-houses screen. */
+.dark .vh-page {
+  background: #080f1e !important;
+  color: #eaf2ff !important;
+  --vh-text: #eaf2ff;
+  --vh-muted: #b8c8dc;
+  --vh-surface: #111d31;
+  --vh-surface-muted: #172941;
+  --vh-line: #2b405c;
+}
+
+/* Replace hard-coded navy text with readable light text. */
+.dark .vh-page [class*="text-[#031130]"] {
+  color: #eaf2ff !important;
+}
+
+/* Keep secondary copy softer while maintaining readable contrast. */
+.dark .vh-page :is(p, span, label, li, h1, h2, h3, h4)[class*="text-[#031130]/"] {
+  color: #c2d0e2 !important;
+}
+.dark .vh-page :is(h1, h2, h3, h4)[class*="text-[#031130]"] {
+  color: #f4f8ff !important;
+}
+.dark .vh-page [class*="text-[#185DF1]"] {
+  color: #83ddff !important;
+}
+
+/* Convert white and pale-blue panels into layered midnight surfaces. */
+.dark .vh-page [class~="bg-white"] {
+  background-color: #111d31 !important;
+}
+.dark .vh-page [class*="bg-[#F3F7FE]"],
+.dark .vh-page [class*="bg-[#E5EEFD]"] {
+  background-color: #172941 !important;
+}
+.dark .vh-page [class*="border-[#031130]"] {
+  border-color: #2b405c !important;
+}
+.dark .vh-page [class*="divide-[#031130]"] > :not([hidden]) ~ :not([hidden]) {
+  border-color: #2b405c !important;
+}
+
+/* Search and application controls remain legible and consistent. */
+.dark .vh-page :is(input, select, textarea) {
+  background-color: #0c192b !important;
+  color: #f4f8ff !important;
+  border-color: #405775 !important;
+}
+.dark .vh-page :is(input, select, textarea)::placeholder {
+  color: #9fb2ca !important;
+  opacity: 1;
+}
+.dark .vh-page select option {
+  background: #111d31;
+  color: #f4f8ff;
+}
+.dark .vh-page :is(input, select, textarea):focus {
+  border-color: #66d9ff !important;
+  outline-color: rgb(102 217 255 / 30%) !important;
+}
+
+/* Keep dark action buttons distinct from the dark page background. */
+.dark .vh-page button[class*="bg-[#031130]"] {
+  background: linear-gradient(135deg, #087eae, #075b89) !important;
+  color: #ffffff !important;
+}
+.dark .vh-page button[class*="bg-white"] {
+  background-color: #20334d !important;
+  color: #f4f8ff !important;
+}
+.dark .vh-page [class*="hover:bg-[#F3F7FE]"]:hover,
+.dark .vh-page [class*="hover:bg-[#E5EEFD]"]:hover {
+  background-color: #203650 !important;
+}
+.dark .vh-page .bg-red-50 {
+  background-color: #3b1822 !important;
+}
+.dark .vh-page .text-red-800,
+.dark .vh-page .text-red-700 {
+  color: #fecaca !important;
+}

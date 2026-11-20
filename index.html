@@ -6,7 +6,8 @@
     <meta name="google-site-verification" content="FdFmNrEfsP1sc3QkzF7pW6aN3xalZtdvBa_9EBD_APY" />
     <script>
       try {
-        if (localStorage.getItem('didoabe-theme') === 'dark') {
+        const savedTheme = localStorage.getItem('didoabe-theme-v2');
+        if (savedTheme !== 'light') {
           document.documentElement.classList.add('dark');
         }
       } catch {

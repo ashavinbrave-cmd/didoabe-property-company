@@ -77,6 +77,7 @@ export default function App() {
   const [publicProperties, setPublicProperties] = useState<PropertyListing[]>([]);
   const [vacantHousesLoading, setVacantHousesLoading] = useState(false);
   const [vacantHousesError, setVacantHousesError] = useState<string | null>(null);
+  const [propertyReloadKey, setPropertyReloadKey] = useState(0);
 
   // Dark and Light Theme State
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -186,7 +187,7 @@ export default function App() {
         if (!cancelled) {
           setPublicProperties([]);
           setVacantHousesError(
-            error instanceof Error ? error.message : 'Available houses could not be loaded.'
+            'Available houses are temporarily unavailable. Please check your connection and try again.'
           );
         }
       } finally {
@@ -198,7 +199,7 @@ export default function App() {
     return () => {
       cancelled = true;
     };
-  }, [activePage]);
+  }, [activePage, propertyReloadKey]);
 
   // Monitor scroll for back to top button
   useEffect(() => {
@@ -265,6 +266,12 @@ export default function App() {
               onNavigate={navigateTo}
             />
 
+            {vacantHousesError && (
+              <div className="mx-auto max-w-4xl px-4 py-5 text-center" role="alert">
+                <p className="text-sm text-red-700 dark:text-red-300">{vacantHousesError}</p>
+                <button type="button" onClick={() => setPropertyReloadKey((value) => value + 1)} className="mt-3 min-h-[44px] rounded-lg bg-sky-700 px-5 py-2 text-sm font-semibold text-white">Try loading houses again</button>
+              </div>
+            )}
             <FeaturedHouses
               properties={publicProperties}
               onViewDetails={(property) => {
@@ -491,9 +498,10 @@ export default function App() {
               <p className="p-8 text-center" role="status">Loading available houses...</p>
             )}
             {vacantHousesError && (
-              <p className="mx-auto max-w-4xl p-6 text-center text-red-700" role="alert">
-                {vacantHousesError}
-              </p>
+              <div className="mx-auto max-w-4xl p-6 text-center" role="alert">
+                <p className="text-red-700 dark:text-red-300">{vacantHousesError}</p>
+                <button type="button" onClick={() => setPropertyReloadKey((value) => value + 1)} className="mt-3 min-h-[44px] rounded-lg bg-sky-700 px-5 py-2 text-sm font-semibold text-white">Try again</button>
+              </div>
             )}
             {!vacantHousesLoading && (
               <VacantHousesPage

@@ -129,16 +129,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="w-full h-full object-contain"
               />
             </div>
-            <div>
-              <div className="flex items-baseline gap-1.5">
-                <span className="font-black text-base sm:text-xl tracking-tight text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0">
+                <span className="font-black text-base sm:text-xl leading-tight tracking-tight text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition-colors">
                   DIDOABE
                 </span>
-                <span className="text-sky-700 dark:text-sky-400 font-extrabold text-xs sm:text-sm tracking-wider uppercase">
+                <span className="text-sky-700 dark:text-sky-400 font-extrabold text-xs sm:text-sm leading-tight tracking-wider uppercase">
                   PROPERTY CO.
                 </span>
               </div>
-              <p className="text-[11px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 tracking-wider">
+              <p className="mt-1 text-[11px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 tracking-wider">
                 We Manage, You Relax
               </p>
             </div>

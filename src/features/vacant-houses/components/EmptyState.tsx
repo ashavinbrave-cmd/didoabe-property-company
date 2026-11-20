@@ -71,7 +71,10 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
     try {
       await onSubmitInquiry(payload);
       setSubmittedPayload(payload);
-    } catch {
+    } catch (error) {
+      // Keep technical details out of the public message, but make the actual
+      // failure available in the browser console for support and diagnosis.
+      console.error('Didoabe vacancy notification submission failed:', error);
       setSubmissionError(
         'We could not submit your inquiry. It has not been confirmed as received. Please check your connection and try again.'
       );

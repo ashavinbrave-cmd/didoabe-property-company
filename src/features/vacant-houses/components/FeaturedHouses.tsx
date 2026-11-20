@@ -7,13 +7,19 @@ import { PropertyCard } from './PropertyCard';
 interface FeaturedHousesProps {
   properties: PropertyListing[];
   onViewDetails: (property: PropertyListing) => void;
+  onViewAll?: () => void;
 }
 
 export const FeaturedHouses: React.FC<FeaturedHousesProps> = ({
   properties,
   onViewDetails,
+  onViewAll,
 }) => {
-  const featured = properties.filter((p) => p.isFeatured);
+  // Always showcase the five newest live available listings on the homepage.
+  // The public API already filters out unpublished and unavailable properties.
+  const featured = [...properties]
+    .sort((a, b) => new Date(b.addedAt).getTime() - new Date(a.addedAt).getTime())
+    .slice(0, 5);
   const featuredAreDemonstrations = featured.length > 0 && featured.every((property) => property.isSampleData);
   const [visibleCount, setVisibleCount] = useState(3);
   const [currentIndex, setCurrentIndex] = useState(0);

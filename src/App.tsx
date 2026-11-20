@@ -15,7 +15,8 @@ const AboutSection = lazy(() => import('./components/AboutSection').then((module
 import { ContactSection } from './components/ContactSection';
 import { FeaturedHouses } from './features/vacant-houses/components/FeaturedHouses';
 import { VacantHousesPage } from './features/vacant-houses';
-import { SAMPLE_VACANT_HOUSES } from './features/vacant-houses/data/vacantHousesData';
+import type { PropertyListing } from './features/vacant-houses/types/property';
+import { getPublicProperties, submitPublicApplication, submitVacancyInquiry } from './features/vacant-houses/integrations/supabasePublic';
 import { FaqSection } from './components/FaqSection';
 import { RemittanceCalculator } from './components/RemittanceCalculator';
 import { LegalModal } from './components/LegalModals';
@@ -40,7 +41,7 @@ const PAGE_METADATA: Record<ActivePage, { title: string; description: string }> 
   process: { title: 'Management Process | Didoabe Property Company', description: 'Review the property management process and prepare an inquiry for Didoabe Property Company.' },
   transparency: { title: 'Financial Transparency | Didoabe Property Company', description: 'View sample reporting information and prepare a property management inquiry.' },
   faqs: { title: 'Frequently Asked Questions | Didoabe Property Company', description: 'Find answers to common property management questions or prepare an inquiry.' },
-  'vacant-houses': { title: 'Vacant Houses | Didoabe Property Company', description: 'Browse clearly labelled demonstration listings and vacant house information from Didoabe Property Company.' },
+  'vacant-houses': { title: 'Available Rental Houses | Didoabe Property Company', description: 'Browse available rental houses in Uganda, review prices and conditions, and submit an application to Didoabe Property Company.' },
   contact: { title: 'Contact | Didoabe Property Company', description: 'Contact information and WhatsApp draft forms for Didoabe Property Company.' },
 };
 
@@ -73,6 +74,9 @@ export default function App() {
   const consultationScrollPendingRef = useRef(false);
   const [legalModalType, setLegalModalType] = useState<'privacy' | 'terms' | null>(null);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [publicProperties, setPublicProperties] = useState<PropertyListing[]>([]);
+  const [vacantHousesLoading, setVacantHousesLoading] = useState(false);
+  const [vacantHousesError, setVacantHousesError] = useState<string | null>(null);
 
   // Dark and Light Theme State
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -167,6 +171,35 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  // Load genuine published vacancies for the homepage and public listings page.
+  useEffect(() => {
+    if (activePage !== 'home' && activePage !== 'vacant-houses') return;
+    let cancelled = false;
+
+    const loadProperties = async () => {
+      setVacantHousesLoading(true);
+      setVacantHousesError(null);
+      try {
+        const data = await getPublicProperties();
+        if (!cancelled) setPublicProperties(data);
+      } catch (error) {
+        if (!cancelled) {
+          setPublicProperties([]);
+          setVacantHousesError(
+            error instanceof Error ? error.message : 'Available houses could not be loaded.'
+          );
+        }
+      } finally {
+        if (!cancelled) setVacantHousesLoading(false);
+      }
+    };
+
+    void loadProperties();
+    return () => {
+      cancelled = true;
+    };
+  }, [activePage]);
+
   // Monitor scroll for back to top button
   useEffect(() => {
     const handleScroll = () => {
@@ -233,7 +266,7 @@ export default function App() {
             />
 
             <FeaturedHouses
-              properties={SAMPLE_VACANT_HOUSES}
+              properties={publicProperties}
               onViewDetails={(property) => {
                 setInitialVacantHouseId(property.id);
                 navigateTo('vacant-houses');
@@ -452,7 +485,24 @@ export default function App() {
         )}
 
         {activePage === 'vacant-houses' && (
-          <VacantHousesPage initialSelectedPropertyId={initialVacantHouseId} />
+          <>
+            {vacantHousesLoading && (
+              <p className="p-8 text-center" role="status">Loading available houses...</p>
+            )}
+            {vacantHousesError && (
+              <p className="mx-auto max-w-4xl p-6 text-center text-red-700" role="alert">
+                {vacantHousesError}
+              </p>
+            )}
+            {!vacantHousesLoading && (
+              <VacantHousesPage
+                properties={publicProperties}
+                initialSelectedPropertyId={initialVacantHouseId}
+                onSubmitApplication={submitPublicApplication}
+                onSubmitVacantInquiry={submitVacancyInquiry}
+              />
+            )}
+          </>
         )}
 
         {activePage === 'contact' && <ContactSection />}

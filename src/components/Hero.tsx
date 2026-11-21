@@ -34,14 +34,14 @@ export const Hero: FC<HeroProps> = ({ onNavigate }) => (
 
         <div className="space-y-4">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-sky-700 dark:text-sky-300">
-            Property management, made clearer
+            Property support built around your needs
           </p>
           <h1 className="text-4xl leading-[1.04] text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
             We Manage.<br />
             <span className="text-sky-700 dark:text-sky-300">You Relax.</span>
           </h1>
           <p className="mx-auto max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-300 lg:mx-0 lg:text-lg">
-            Professional property management information for owners and residents, with clear ways to explore services and contact the team.
+            From tenant communication and rent tracking to maintenance coordination, explore practical support for your property—and find clear next steps for your needs.
           </p>
         </div>
 
@@ -52,7 +52,7 @@ export const Hero: FC<HeroProps> = ({ onNavigate }) => (
             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-amber-500 px-5 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-amber-900/10 transition hover:-translate-y-0.5 hover:bg-amber-400"
           >
             <KeyRound className="h-4 w-4" aria-hidden="true" />
-            For Landlords
+            Find Owner Support
           </button>
           <button
             type="button"
@@ -60,7 +60,7 @@ export const Hero: FC<HeroProps> = ({ onNavigate }) => (
             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-sky-700 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-sky-950/10 transition hover:-translate-y-0.5 hover:bg-sky-700"
           >
             <Building className="h-4 w-4" aria-hidden="true" />
-            Explore Services
+            Explore Our Services
           </button>
           <button
             type="button"
@@ -68,7 +68,7 @@ export const Hero: FC<HeroProps> = ({ onNavigate }) => (
             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white/80 px-5 py-3 text-sm font-semibold text-slate-800 transition hover:border-sky-400 hover:bg-sky-50 dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
           >
             <Info className="h-4 w-4 text-sky-700 dark:text-sky-300" aria-hidden="true" />
-            About Didoabe
+            Meet Didoabe
           </button>
           <button
             type="button"
@@ -76,7 +76,7 @@ export const Hero: FC<HeroProps> = ({ onNavigate }) => (
             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white/80 px-5 py-3 text-sm font-semibold text-slate-800 transition hover:border-sky-400 hover:bg-sky-50 dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700"
           >
             <PhoneCall className="h-4 w-4 text-sky-700 dark:text-sky-300" aria-hidden="true" />
-            Contact
+            Talk to Our Team
           </button>
           <a
             href={COMPANY_INFO.whatsappUrl}
@@ -109,7 +109,7 @@ export const Hero: FC<HeroProps> = ({ onNavigate }) => (
         </div>
 
         <p className="text-xs leading-5 text-slate-500 dark:text-slate-400">
-          Use the service pages and contact options to confirm availability, scope, and terms directly with the company.
+          Every property is different. Explore the services, then speak with the team about scope and terms for yours.
         </p>
       </div>
 
@@ -134,8 +134,8 @@ export const Hero: FC<HeroProps> = ({ onNavigate }) => (
             </div>
             <div className="absolute bottom-5 left-5 right-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-sm text-white">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">A service overview</p>
-                <p className="mt-1 text-xl font-semibold">Support for property owners and residents</p>
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-sky-200">Property support, made clearer</p>
+                <p className="mt-1 text-xl font-semibold">Practical support for owners and residents</p>
               </div>
               <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-white/30 bg-black/40 px-3 py-1.5 text-[11px] font-semibold text-white backdrop-blur">
                 <MapPin className="h-3.5 w-3.5 text-amber-300" aria-hidden="true" />
@@ -151,7 +151,7 @@ export const Hero: FC<HeroProps> = ({ onNavigate }) => (
               </span>
               <div>
                 <h2 className="font-sans text-sm font-bold tracking-normal text-slate-900 dark:text-white">Owner information</h2>
-                <p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-300">Explore services, estimates, and sample reporting details.</p>
+                <p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-300">See service options, estimate tools, and sample reporting.</p>
               </div>
             </div>
             <div className="flex items-start gap-3 rounded-xl bg-slate-50 p-4 dark:bg-slate-900">
@@ -160,7 +160,7 @@ export const Hero: FC<HeroProps> = ({ onNavigate }) => (
               </span>
               <div>
                 <h2 className="font-sans text-sm font-bold tracking-normal text-slate-900 dark:text-white">Tenant support</h2>
-                <p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-300">Prepare a WhatsApp draft for a property-related inquiry.</p>
+                <p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-300">Find guidance and start a WhatsApp message about your property.</p>
               </div>
             </div>
           </div>
@@ -171,7 +171,7 @@ export const Hero: FC<HeroProps> = ({ onNavigate }) => (
             className="mx-3 mb-3 flex min-h-12 w-[calc(100%-1.5rem)] items-center justify-center gap-2 rounded-xl bg-sky-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-sky-900 dark:bg-sky-800 dark:hover:bg-sky-700"
           >
             <KeyRound className="h-4 w-4 text-amber-300" aria-hidden="true" />
-            View landlord services
+            Explore landlord services
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </button>
         </div>

@@ -3,7 +3,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; form-action 'none'; script-src 'self' 'sha256-yKj4+ttqqEpjbmufQ4u3H0gIZ4ywpUBrLGDm54SFrWs=' 'sha256-kR5qN8h7qbUJpbCUnb/L/lYTAnRK8fprPAGql9kHsg4='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://ceabpgxlmlmyqtvmuiow.supabase.co; font-src 'self' data:; connect-src 'self' https://ceabpgxlmlmyqtvmuiow.supabase.co; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none'; form-action 'none'; script-src 'self' 'sha256-yKj4+ttqqEpjbmufQ4u3H0gIZ4ywpUBrLGDm54SFrWs=' 'sha256-kR5qN8h7qbUJpbCUnb/L/lYTAnRK8fprPAGql9kHsg4='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://ceabpgxlmlmyqtvmuiow.supabase.co; font-src 'self' data:; connect-src 'self' https://ceabpgxlmlmyqtvmuiow.supabase.co https://www.google-analytics.com https://region1.google-analytics.com; upgrade-insecure-requests
 
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
